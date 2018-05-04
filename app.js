@@ -9,6 +9,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', (process.env.PORT || 8080));
 
+const characterContext = (data) =>
+`Name: ${data.description.name}
+Age: ${data.description.age}
+Gender: ${data.description.gender}
+Race: ${data.description.race}
+Occupation: ${data.description.occupation}`;
+
 app.get('/', (req, res) => {
     return res.send('Running');
 });
@@ -25,15 +32,11 @@ app.post('/generate', async (req, res) => {
 
     console.log(data.description);
 
-    const characterContext = `Name: ${data.description.name}
-    Age: ${data.description.age}
-    Gender: ${data.description.gender}
-    Race: ${data.description.race}
-    Occupation: ${data.description.occupation}`;
+    const character = characterContext(data);
 
     const body = {
         response_type: "in_channel",
-        "attachments": [ { "text": characterContext } ]
+        "attachments": [ { "text": character } ]
     };
     return res.send(body);
 });
