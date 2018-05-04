@@ -1,0 +1,19 @@
+{
+  "name": "slashcommand",
+  "version": "1.0.0",
+  "description": "Slack slash command playground",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Likquid/slashCommand.git"
+  },
+  "author": "Likquid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Likquid/slashCommand/issues"
+  },
+  "homepage": "https://github.com/Likquid/slashCommand#readme"
+}
