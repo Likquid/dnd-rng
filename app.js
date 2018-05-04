@@ -14,12 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/generate', async (req, res) => {
-    const raceIndex = Math.floor((Math.random() * 19) + 1);
-    const genderIndex = Math.round(Math.random());
-    const alignmentIndex = Math.floor((Math.random() * 2) + 1);
-
-    const URL = `http://npcgenerator.azurewebsites.net/_/npc?race=${raceIndex}&gender=${genderIndex}&alignment=${alignmentIndex}`;
-
+    const URL = `http://npcgenerator.azurewebsites.net/_/npc?classorprof=0`;
     const response = await axios({
         method: 'get',
         url: URL,
@@ -30,8 +25,7 @@ app.post('/generate', async (req, res) => {
 
     console.log(data.description);
 
-    const characterContext = `
-    Name: ${data.description.name}
+    const characterContext = `Name: ${data.description.name}
     Age: ${data.description.age}
     Gender: ${data.description.gender}
     Race: ${data.description.race}
