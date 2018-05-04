@@ -28,16 +28,18 @@ app.get('/generateCharacter', async (req, res) => {
 
     const data = response.data;
 
+    console.log(data.description);
+
     const body = {
         response_type: "in_channel",
         "attachments": [
             {
                 "text": "description: \n"
-                + `Name: ${data.description.name} \n`
-                + `Age: ${data.description.age} \n`
-                + `Gender: ${data.description.gender} \n`
-                + `Race: ${data.description.race} \n`
-                + `Occupation: ${data.description.occupation}`
+                + "Name: " + data.description.name + "\n"
+                + "Age: " + data.description.age + "\n"
+                + "Gender: " + data.description.gender + "\n"
+                + "Race: " + data.description.race + "\n"
+                + "Occupation: " + data.description.occupation
             }
         ]
     };
