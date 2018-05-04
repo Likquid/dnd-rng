@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     return res.send('Running');
 });
 
-app.get('/generateCharacter', async (req, res) => {
+app.post('/generateCharacter', async (req, res) => {
     const raceIndex = Math.floor((Math.random() * 19) + 1);
     const genderIndex = Math.round(Math.random());
     const alignmentIndex = Math.floor((Math.random() * 2) + 1);
