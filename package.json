@@ -1,7 +1,7 @@
 {
-  "name": "slashcommand",
+  "name": "Slack bot dnd random character generator",
   "version": "1.0.0",
-  "description": "Slack slash command playground",
+  "description": "Slash command to make a random dnd character",
   "main": "app.js",
   "scripts": {
     "test": "test"
