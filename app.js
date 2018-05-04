@@ -34,11 +34,11 @@ app.post('/generate', async (req, res) => {
         response_type: "in_channel",
         "attachments": [
             {
-                "text": "Name: " + data.description.name + "\n"
-                + "Age: " + data.description.age + "\n"
-                + "Gender: " + data.description.gender + "\n"
-                + "Race: " + data.description.race + "\n"
-                + "Occupation: " + data.description.occupation
+                "text": `Name: ${data.description.name}
+                Age: ${data.description.age}
+                Gender: ${data.description.gender}
+                Race: ${data.description.race}
+                Occupation: ${data.description.occupation}`
             }
         ]
     };
