@@ -30,17 +30,16 @@ app.post('/generate', async (req, res) => {
 
     console.log(data.description);
 
+    const characterContext = `
+    Name: ${data.description.name}
+    Age: ${data.description.age}
+    Gender: ${data.description.gender}
+    Race: ${data.description.race}
+    Occupation: ${data.description.occupation}`;
+
     const body = {
         response_type: "in_channel",
-        "attachments": [
-            {
-                "text": `Name: ${data.description.name}
-                Age: ${data.description.age}
-                Gender: ${data.description.gender}
-                Race: ${data.description.race}
-                Occupation: ${data.description.occupation}`
-            }
-        ]
+        "attachments": [ { "text": characterContext } ]
     };
     return res.send(body);
 });
