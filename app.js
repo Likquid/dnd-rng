@@ -34,8 +34,7 @@ app.post('/generateCharacter', async (req, res) => {
         response_type: "in_channel",
         "attachments": [
             {
-                "text": "description: \n"
-                + "Name: " + data.description.name + "\n"
+                "text": "Name: " + data.description.name + "\n"
                 + "Age: " + data.description.age + "\n"
                 + "Gender: " + data.description.gender + "\n"
                 + "Race: " + data.description.race + "\n"
