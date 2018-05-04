@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Likquid/slashCommand/issues"
   },
-  "homepage": "https://github.com/Likquid/slashCommand#readme"
+  "homepage": "https://github.com/Likquid/slashCommand#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "request": "^2.85.0"
+  }
 }
