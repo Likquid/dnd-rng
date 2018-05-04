@@ -13,6 +13,37 @@ app.get('/', (req, res) => {
     return res.send('Running');
 });
 
+app.get('/generateCharacter', async (req, res) => {
+    const raceIndex = Math.floor((Math.random() * 19) + 1);
+    const genderIndex = Math.round(Math.random());
+    const alignmentIndex = Math.floor((Math.random() * 2) + 1);
+
+    const URL = `http://npcgenerator.azurewebsites.net/_/npc?race=${raceIndex}&gender=${genderIndex}&alignment=${alignmentIndex}`;
+
+    const response = await axios({
+        method: 'get',
+        url: URL,
+        response: 'json'
+    });
+
+    const data = response.data;
+
+    const body = {
+        response_type: "in_channel",
+        "attachments": [
+            {
+                "text": "description: \n"
+                + `Name: ${data.description.name} \n`
+                + `Age: ${data.description.age} \n`
+                + `Gender: ${data.description.gender} \n`
+                + `Race: ${data.description.race} \n`
+                + `Occupation: ${data.description.occupation}`
+            }
+        ]
+    };
+    return res.send(body);
+});
+
 //app.post is triggered when a POST request is sent to the URL ‘/post’
 app.post('/post', async (req, res)=> {
     //take a message from Slack slash command
