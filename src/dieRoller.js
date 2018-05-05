@@ -1,7 +1,7 @@
 const diceRollerHelpText = (max) => {
     return {
         response_type: "in_channel",
-        "attachments": [ { "text": `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} tpye in /${max} 2, only accepts numbers are the second argument.`} ]
+        "attachments": [ { "text": `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} type in /${max} 2, only accepts numbers as the first argument.`} ]
     }
 };
 
