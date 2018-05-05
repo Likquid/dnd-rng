@@ -44,6 +44,15 @@ ${data.religion.description}
 Plot Hook: ${data.hook.description}
 `;
 
+const diceRoller = (maxLimit) => {
+    const rolled = Math.floor((Math.random() * maxLimit) + 1);
+    console.log(`Rolled a ${rolled}`);
+    return {
+        response_type: "in_channel",
+        "attachments": [ { "text": `You rolled a ${rolled}` } ]
+    };
+};
+
 app.get('/', (req, res) => {
     return res.send('Running');
 });
@@ -67,6 +76,34 @@ app.post('/generate', async (req, res) => {
         "attachments": [ { "text": character } ]
     };
     return res.send(body);
+});
+
+app.post('/4', async (req, res) => {
+    return res.send(diceRoller(4));
+});
+
+app.post('/6', async (req, res) => {
+    return res.send(diceRoller(6));
+});
+
+app.post('/8', async (req, res) => {
+    return res.send(diceRoller(8));
+});
+
+app.post('/10', async (req, res) => {
+    return res.send(diceRoller(10));
+});
+
+app.post('/12', async (req, res) => {
+    return res.send(diceRoller(12));
+});
+
+app.post('/20', async (req, res) => {
+    return res.send(diceRoller(20));
+});
+
+app.post('/100', async (req, res) => {
+    return res.send(diceRoller(100));
 });
 
 app.listen(app.get('port'), () => {
