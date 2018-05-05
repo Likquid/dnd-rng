@@ -7,7 +7,7 @@ const diceRollerHelpText = (max) => {
 
 const singleRoll = (max) => Math.floor((Math.random() * max) + 1);
 
-const dieRoller = (max, dices) => {
+const dieRoller = (max, username, dices) => {
     if (dices) {
         let rolled = 0;
         for (let i = 0; i < dices; i++) {
@@ -15,12 +15,12 @@ const dieRoller = (max, dices) => {
         }
         return {
             response_type: "in_channel",
-            "attachments": [ { "text": `You rolled a ${rolled}` } ]
+            "attachments": [ { "text": `${username} rolled a ${rolled}` } ]
         };
     }
     return {
         response_type: "in_channel",
-        "attachments": [ { "text": `You rolled a ${singleRoll(max)}` } ]
+        "attachments": [ { "text": `${username} rolled a ${singleRoll(max)}` } ]
     };
 };
 
@@ -32,15 +32,16 @@ const dieRollerError = (max) => {
 };
 
 exports.dndDieRngBuilder = (req, res, max) => {
+    const username = req.body.user_name;
     if (!req.body.text) {
-        return res.send(dieRoller(max));
+        return res.send(dieRoller(max, username));
     }
     const query = req.body.text;
     if (query === 'help') {
-        return res.send(diceRollerHelpText(max));
+        return res.send(diceRollerHelpText(max, username));
     }
     if (isNaN(query) && query !== 'help') {
-        return res.send(dieRollerError(max));
+        return res.send(dieRollerError(max, username));
     }
-    return res.send(dieRoller(max, parseInt(query)));
+    return res.send(dieRoller(max, username, parseInt(query)));
 };
