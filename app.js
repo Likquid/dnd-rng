@@ -44,12 +44,26 @@ ${data.religion.description}
 Plot Hook: ${data.hook.description}
 `;
 
-const diceRoller = (maxLimit) => {
-    const rolled = Math.floor((Math.random() * maxLimit) + 1);
+const diceRollerHelpText = (max) => {
+    return {
+        response_type: "in_channel",
+        "attachments": [ { "text": `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} tpye in /${max} 2, only accepts numbers are the second argument.`} ]
+    }
+};
+
+const diceRoller = (max) => {
+    const rolled = Math.floor((Math.random() * max) + 1);
     console.log(`Rolled a ${rolled}`);
     return {
         response_type: "in_channel",
         "attachments": [ { "text": `You rolled a ${rolled}` } ]
+    };
+};
+
+const diceRollerError = (max) => {
+    return {
+        response_type: "in_channel",
+        "attachments": [ { "text": `You've got to put in number... If you want some help type in /${max} help` } ]
     };
 };
 
@@ -79,7 +93,20 @@ app.post('/generate', async (req, res) => {
 });
 
 app.post('/4', async (req, res) => {
-    return res.send(diceRoller(4));
+    if (!req.body.text) {
+        return res.send(diceRoller(4));
+    }
+    const query = req.body.text;
+    if (query === 'help') {
+        return res.send(diceRollerHelpText(4));
+    }
+    if (isNaN(query) && query !== 'help') {
+        return res.send(diceRollerError(4));
+    }
+    return res.send({
+        response_type: "in_channel",
+        "attachments": [ { "text": `Something went wrong...` } ]
+    });
 });
 
 app.post('/6', async (req, res) => {
