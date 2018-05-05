@@ -43,7 +43,7 @@ app.post('/12', async (req, res) => dndDieRngBuilder(req, res, 12));
 
 app.post('/20', async (req, res) => dndDieRngBuilder(req, res, 20));
 
-app.post('/20', async (req, res) => dndDieRngBuilder(req, res, 20));
+app.post('/100', async (req, res) => dndDieRngBuilder(req, res, 100));
 
 app.listen(app.get('port'), () => {
     console.log('Node app is running on port', app.get('port'));
