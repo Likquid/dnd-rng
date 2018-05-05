@@ -53,7 +53,7 @@ const diceRollerHelpText = (max) => {
 
 const singleRoll = (max) => Math.floor((Math.random() * max) + 1);
 
-const diceRoller = (max, dices) => {
+const dieRoller = (max, dices) => {
     if (dices) {
         let rolled = 0;
         for (let i = 0; i < dices; i++) {
@@ -70,11 +70,25 @@ const diceRoller = (max, dices) => {
     };
 };
 
-const diceRollerError = (max) => {
+const dieRollerError = (max) => {
     return {
         response_type: "in_channel",
         "attachments": [ { "text": `You've got to put in number... If you want some help type in /${max} help` } ]
     };
+};
+
+const dndDieRngBuilder = (req, res, max) => {
+    if (!req.body.text) {
+        return res.send(dieRoller(max));
+    }
+    const query = req.body.text;
+    if (query === 'help') {
+        return res.send(diceRollerHelpText(max));
+    }
+    if (isNaN(query) && query !== 'help') {
+        return res.send(dieRollerError(max));
+    }
+    return res.send(dieRoller(max, parseInt(query)));
 };
 
 app.get('/', (req, res) => {
@@ -88,13 +102,8 @@ app.post('/generate', async (req, res) => {
         url: URL,
         response: 'json'
     });
-
     const data = response.data;
-
-    console.log(data.description);
-
     const character = characterContext(data);
-
     const body = {
         response_type: "in_channel",
         "attachments": [ { "text": character } ]
@@ -102,42 +111,30 @@ app.post('/generate', async (req, res) => {
     return res.send(body);
 });
 
-app.post('/4', async (req, res) => {
-    if (!req.body.text) {
-        return res.send(diceRoller(4));
-    }
-    const query = req.body.text;
-    if (query === 'help') {
-        return res.send(diceRollerHelpText(4));
-    }
-    if (isNaN(query) && query !== 'help') {
-        return res.send(diceRollerError(4));
-    }
-    return res.send(diceRoller(4, parseInt(query)));
-});
+app.post('/4', async (req, res) => dndDieRngBuilder(req, res, 4));
 
 app.post('/6', async (req, res) => {
-    return res.send(diceRoller(6));
+    return res.send(dieRoller(6));
 });
 
 app.post('/8', async (req, res) => {
-    return res.send(diceRoller(8));
+    return res.send(dieRoller(8));
 });
 
 app.post('/10', async (req, res) => {
-    return res.send(diceRoller(10));
+    return res.send(dieRoller(10));
 });
 
 app.post('/12', async (req, res) => {
-    return res.send(diceRoller(12));
+    return res.send(dieRoller(12));
 });
 
 app.post('/20', async (req, res) => {
-    return res.send(diceRoller(20));
+    return res.send(dieRoller(20));
 });
 
 app.post('/100', async (req, res) => {
-    return res.send(diceRoller(100));
+    return res.send(dieRoller(100));
 });
 
 app.listen(app.get('port'), () => {
