@@ -51,12 +51,22 @@ const diceRollerHelpText = (max) => {
     }
 };
 
-const diceRoller = (max) => {
-    const rolled = Math.floor((Math.random() * max) + 1);
-    console.log(`Rolled a ${rolled}`);
+const singleRoll = (max) => Math.floor((Math.random() * max) + 1);
+
+const diceRoller = (max, dices) => {
+    if (dices) {
+        let rolled = 0;
+        for (let i = 0; i < dices; i++) {
+            rolled += singleRoll(max)
+        }
+        return {
+            response_type: "in_channel",
+            "attachments": [ { "text": `You rolled a ${rolled}` } ]
+        };
+    }
     return {
         response_type: "in_channel",
-        "attachments": [ { "text": `You rolled a ${rolled}` } ]
+        "attachments": [ { "text": `You rolled a ${singleRoll(max)}` } ]
     };
 };
 
@@ -103,10 +113,7 @@ app.post('/4', async (req, res) => {
     if (isNaN(query) && query !== 'help') {
         return res.send(diceRollerError(4));
     }
-    return res.send({
-        response_type: "in_channel",
-        "attachments": [ { "text": `Something went wrong...` } ]
-    });
+    return res.send(diceRoller(4, parseInt(query)));
 });
 
 app.post('/6', async (req, res) => {
