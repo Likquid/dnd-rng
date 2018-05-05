@@ -36,7 +36,6 @@ exports.dndDieRngBuilder = (req, res, max) => {
         return res.send(dieRoller(max));
     }
     const query = req.body.text;
-    console.log(req.body);
     if (query === 'help') {
         return res.send(diceRollerHelpText(max));
     }
