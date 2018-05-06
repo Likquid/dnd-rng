@@ -31,20 +31,7 @@ app.post('/generate', async (req, res) => {
     return res.send(body);
 });
 
-app.post('/4', async (req, res) => {
-    if (req.body) {
-        await axios({
-            method: 'post',
-            url: req.body.response_url,
-            data: {
-                response_type: "in_channel",
-                text: `test message`
-            }
-        });
-    }
-    console.log('Should have returned message');
-    // dndDieRngBuilder(req, res, 4)
-});
+app.post('/4', async (req, res) => dndDieRngBuilder(req, res, 4));
 
 app.post('/6', async (req, res) => dndDieRngBuilder(req, res, 6));
 

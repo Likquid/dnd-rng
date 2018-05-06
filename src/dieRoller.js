@@ -1,8 +1,17 @@
+const axios = require('axios');
+
 const diceRollerHelpText = (max) => {
     return {
         response_type: "ephemeral",
         text: `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} type in /${max} 2, only accepts numbers as the first argument.`
     }
+};
+
+const dieRollerError = (max) => {
+    return {
+        response_type: "ephemeral",
+        text: `You've got to put in number... If you want some help type in /${max} help`
+    };
 };
 
 const singleRoll = (max) => Math.floor((Math.random() * max) + 1);
@@ -18,17 +27,22 @@ const dieRoller = (max, username, dices = 1) => {
     };
 };
 
-const dieRollerError = (max) => {
-    return {
-        response_type: "ephemeral",
-        text: `You've got to put in number... If you want some help type in /${max} help`
-    };
+const delayedResponse = async (responseUrl, data) => {
+    await axios({
+        method: 'post',
+        url: responseUrl,
+        data
+    });
 };
 
-exports.dndDieRngBuilder = (req, res, max) => {
+exports.dndDieRngBuilder = async (req, res, max) => {
+    console.log(req.body);
     const username = req.body.user_name;
+    const responseUrl = req.body.response_url;
+    let rolledData;
     if (!req.body.text) {
-        return res.send(dieRoller(max, username));
+        rolledData = dieRoller(max, username);
+        return await delayedResponse(responseUrl, rolledData);
     }
     const query = req.body.text;
     if (query === 'help') {
@@ -37,5 +51,6 @@ exports.dndDieRngBuilder = (req, res, max) => {
     if (isNaN(query) && query !== 'help') {
         return res.send(dieRollerError(max, username));
     }
-    return res.send(dieRoller(max, username, parseInt(query)));
+    rolledData = dieRoller(max, username, parseInt(query));
+    return await delayedResponse(responseUrl, rolledData)
 };

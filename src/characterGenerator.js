@@ -1,5 +1,5 @@
 exports.characterContext = (data) =>
-    `Name: ${data.description.name}
+`Name: ${data.description.name}
 Age: ${data.description.age}
 Gender: ${data.description.gender}
 Race: ${data.description.race}
