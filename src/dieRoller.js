@@ -47,7 +47,5 @@ exports.dndDieRngBuilder = async (req, res, max) => {
         return res.send(dieRollerError(max, username));
     }
     rolledData = dieRoller(max, username, query ? parseInt(query) : 1);
-    const output = await delayedResponse(responseUrl, rolledData);
-    console.log(output);
-    return output;
+    return await delayedResponse(responseUrl, rolledData);
 };
