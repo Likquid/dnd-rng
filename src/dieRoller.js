@@ -1,7 +1,7 @@
 const diceRollerHelpText = (max) => {
     return {
         response_type: "ephemeral",
-        "attachments": [ { "text": `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} type in /${max} 2, only accepts numbers as the first argument.`} ]
+        text: `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} type in /${max} 2, only accepts numbers as the first argument.`
     }
 };
 
@@ -14,14 +14,14 @@ const dieRoller = (max, username, dices = 1) => {
     }
     return {
         response_type: "in_channel",
-        "attachments": [ { "text": `${username} rolled a ${rolled} from ${dices}d${max}` } ]
+        text: `${username} rolled a ${rolled} from ${dices}d${max}`
     };
 };
 
 const dieRollerError = (max) => {
     return {
         response_type: "ephemeral",
-        "attachments": [ { "text": `You've got to put in number... If you want some help type in /${max} help` } ]
+        text: `You've got to put in number... If you want some help type in /${max} help`
     };
 };
 
