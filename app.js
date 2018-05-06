@@ -31,10 +31,7 @@ app.post('/generate', async (req, res) => {
     return res.send(body);
 });
 
-app.post('/4', async (req, res) => {
-    console.log(req.body);
-    return dndDieRngBuilder(req, res, 4)
-});
+app.post('/4', async (req, res) => dndDieRngBuilder(req, res, 4));
 
 app.post('/6', async (req, res) => dndDieRngBuilder(req, res, 6));
 

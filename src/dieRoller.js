@@ -1,32 +1,26 @@
 const diceRollerHelpText = (max) => {
     return {
-        response_type: "in_channel",
+        response_type: "ephemeral",
         "attachments": [ { "text": `Default behaviour of /${max} rolls 1d${max}. If you wish to roll multiple e.g. 2d${max} type in /${max} 2, only accepts numbers as the first argument.`} ]
     }
 };
 
 const singleRoll = (max) => Math.floor((Math.random() * max) + 1);
 
-const dieRoller = (max, username, dices) => {
-    if (dices) {
-        let rolled = 0;
-        for (let i = 0; i < dices; i++) {
-            rolled += singleRoll(max)
-        }
-        return {
-            response_type: "in_channel",
-            "attachments": [ { "text": `${username} rolled a ${rolled}` } ]
-        };
+const dieRoller = (max, username, dices = 1) => {
+    let rolled = 0;
+    for (let i = 0; i < dices; i++) {
+        rolled += singleRoll(max)
     }
     return {
         response_type: "in_channel",
-        "attachments": [ { "text": `${username} rolled a ${singleRoll(max)}` } ]
+        "attachments": [ { "text": `${username} rolled a ${rolled} from ${dices}d${max}` } ]
     };
 };
 
 const dieRollerError = (max) => {
     return {
-        response_type: "in_channel",
+        response_type: "ephemeral",
         "attachments": [ { "text": `You've got to put in number... If you want some help type in /${max} help` } ]
     };
 };
