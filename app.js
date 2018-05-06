@@ -35,7 +35,7 @@ app.post('/4', async (req, res) => {
     if (req.body) {
         await axios({
             method: 'post',
-            url: req.body.request_url,
+            url: req.body.response_url,
             data: {
                 response_type: "in_channel",
                 text: `test message`
