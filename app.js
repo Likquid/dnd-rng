@@ -54,6 +54,7 @@ app.post('/initiative', async (req, res) => {
         roll = singleRoll(20);
         const rolledPlayer = {
             name: player.name,
+            modifier: player.modifier,
             roll,
         };
         initiative.push(rolledPlayer);
@@ -63,7 +64,7 @@ app.post('/initiative', async (req, res) => {
 
     let initiativeString = '';
     _.each(sortedInitiative, (player) => {
-        initiativeString += `${player.name}(${player.roll})\n`;
+        initiativeString += `${player.name} ${player.roll + player.modifier} (${player.roll} + ${player.modifier})\n`;
     });
 
     let data = {
