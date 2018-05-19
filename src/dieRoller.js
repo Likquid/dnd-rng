@@ -14,12 +14,12 @@ const dieRollerError = (max) => {
     };
 };
 
-const singleRoll = (max) => Math.floor((Math.random() * max) + 1);
+exports.singleRoll = (max) => Math.floor((Math.random() * max) + 1);
 
 const dieRoller = (max, username, dices = 1) => {
     let rolled = 0;
     for (let i = 0; i < dices; i++) {
-        rolled += singleRoll(max)
+        rolled += exports.singleRoll(max)
     }
     return {
         response_type: "in_channel",
@@ -40,12 +40,8 @@ exports.dndDieRngBuilder = async (req, res, max) => {
     const username = req.body.user_name;
     const responseUrl = req.body.response_url;
     let rolledData;
-    if (query === 'help') {
-        return res.send(diceRollerHelpText(max, username));
-    }
-    if (isNaN(query) && query !== 'help') {
-        return res.send(dieRollerError(max, username));
-    }
+    if (query === 'help') return res.send(diceRollerHelpText(max, username));
+    if (isNaN(query) && query !== 'help') return res.send(dieRollerError(max, username));
     rolledData = dieRoller(max, username, query ? parseInt(query) : 1);
     return await delayedResponse(responseUrl, rolledData);
 };

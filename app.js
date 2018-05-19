@@ -1,9 +1,11 @@
 const express = require('express');
 const axios = require('axios');
+const _ = require('lodash');
 
 const app = express();
 const { characterContext } = require('./src/characterGenerator');
-const { dndDieRngBuilder } = require('./src/dieRoller');
+const { dndDieRngBuilder, singleRoll } = require('./src/dieRoller');
+const { PLAYERS } = require('./src/constants');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -44,6 +46,37 @@ app.post('/12', async (req, res) => dndDieRngBuilder(req, res, 12));
 app.post('/20', async (req, res) => dndDieRngBuilder(req, res, 20));
 
 app.post('/100', async (req, res) => dndDieRngBuilder(req, res, 100));
+
+app.post('/initiative', async (req, res) => {
+    let initiative = [];
+    let roll;
+    _.each(PLAYERS, (player) => {
+        roll = singleRoll(20);
+        const rolledPlayer = {
+            name: player.name,
+            roll,
+        };
+        initiative.push(rolledPlayer);
+    });
+
+    let sortedInitiative = _.orderBy(initiative, ['roll'], ['desc']);
+
+    let initiativeString = '';
+    _.each(sortedInitiative, (player) => {
+        initiativeString += `${player.name}(${player.roll})\n`;
+    });
+
+    let data = {
+        response_type: "in_channel",
+        text: `Initiative order:\n${initiativeString}`
+    };
+
+    return await axios({
+        method: 'post',
+        url: req.body.response_url,
+        data
+    });
+});
 
 app.listen(app.get('port'), () => {
     console.log('Node app is running on port', app.get('port'));
