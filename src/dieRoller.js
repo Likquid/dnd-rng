@@ -1,4 +1,4 @@
-const axios = require('axios');
+const { delayedResponse } = require('./util/slackResponse');
 
 const diceRollerHelpText = (max) => {
     return {
@@ -25,14 +25,6 @@ const dieRoller = (max, username, dices = 1) => {
         response_type: "in_channel",
         text: `${username} rolled a ${rolled} from ${dices}d${max}`
     };
-};
-
-const delayedResponse = async (responseUrl, data) => {
-    await axios({
-        method: 'post',
-        url: responseUrl,
-        data
-    });
 };
 
 exports.dndDieRngBuilder = async (req, res, max) => {
