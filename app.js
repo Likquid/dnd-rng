@@ -10,11 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', (process.env.PORT || 8080));
 
-app.get('/', (req, res) => {
-    return res.send('Running');
-});
+app.get('/', (req, res) => res.send('Running'));
 
-app.post('/generate', async (req, res) => generateCharacter(req.body.response_url));
+app.post('/generate', async (req, res) => generateCharacter(req.body.response_url, res));
 
 app.post('/initiative', async (req, res) => rollInitiative(req.body.response_url));
 

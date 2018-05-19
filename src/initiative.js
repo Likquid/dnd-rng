@@ -35,7 +35,8 @@ const PLAYERS = [
 
 exports.rollInitiative = async (responseUrl) => {
     let initiative = [];
-    let roll;
+    let roll = 0;
+    let initiativeString = '';
     _.each(PLAYERS, (player) => {
         roll = singleRoll(20);
         const rolledPlayer = {
@@ -46,7 +47,6 @@ exports.rollInitiative = async (responseUrl) => {
         initiative.push(rolledPlayer);
     });
     let sortedInitiative = _.orderBy(initiative, ['roll'], ['desc']);
-    let initiativeString = '';
     _.each(sortedInitiative, (player) => {
         initiativeString += `${player.name} ${player.roll + player.modifier} (${player.roll} + ${player.modifier})\n`;
     });
