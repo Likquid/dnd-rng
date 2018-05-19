@@ -27,19 +27,22 @@ const dieRoller = (max, username, dices = 1) => {
     };
 };
 
-exports.dndDieRngBuilder = async (req, max) => {
+exports.dndDieRngBuilder = async (req, res, max) => {
     const query = req.body.text;
     const username = req.body.user_name;
     const responseUrl = req.body.response_url;
     let rolledData;
     if (query === 'help') {
         const helpText = diceRollerHelpText(max, username);
+        res.status(200).send();
         return await delayedResponse(responseUrl, helpText);
     }
     if (isNaN(query) && query !== 'help') {
         const errorText = dieRollerError(max, username);
+        res.status(200).send();
         return await delayedResponse(responseUrl, errorText);
     }
     rolledData = dieRoller(max, username, query ? parseInt(query) : 1);
+    res.status(200).send();
     return await delayedResponse(responseUrl, rolledData);
 };

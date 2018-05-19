@@ -33,7 +33,7 @@ const PLAYERS = [
     }
 ];
 
-exports.rollInitiative = async (responseUrl) => {
+exports.rollInitiative = async (responseUrl, res) => {
     let initiative = [];
     let roll = 0;
     let initiativeString = '';
@@ -54,5 +54,6 @@ exports.rollInitiative = async (responseUrl) => {
         response_type: "in_channel",
         text: `Initiative order:\n${initiativeString}`
     };
+    res.status(200).send();
     return await delayedResponse(responseUrl, data);
 };
