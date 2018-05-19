@@ -36,7 +36,7 @@ ${data.religion.description}
 Plot Hook: ${data.hook.description}
 `;
 
-exports.generateCharacter = async (responseUrl) => {
+exports.generateCharacter = async (responseUrl, res) => {
     const response = await axios({
         method: 'get',
         url: 'http://npcgenerator.azurewebsites.net/_/npc?classorprof=0',
@@ -48,5 +48,6 @@ exports.generateCharacter = async (responseUrl) => {
         response_type: "in_channel",
         "attachments": [ { "text": character } ]
     };
+    res.status(200).send();
     return await delayedResponse(responseUrl, body);
 };
