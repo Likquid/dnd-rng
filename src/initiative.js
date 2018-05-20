@@ -53,7 +53,7 @@ exports.rollInitiative = async (responseUrl, res) => {
     });
     let data = {
         response_type: "in_channel",
-        text: `Initiative order:\n${initiativeString}`
+        text: `*Initiative order:*\n${initiativeString}`
     };
     res.status(200).send();
     return await delayedResponse(responseUrl, data);
