@@ -74,7 +74,9 @@ exports.rollLoot = async (responseUrl, res) => {
     let sortedLootRoll = _.orderBy(loot, ['roll'], ['desc']);
     _.each(sortedLootRoll, (player, index) => {
         if (index === 0) {
-            lootString = `*${index + 1}.* ${player.name} *(${player.roll}) JACKPOT!!!*\n`;
+            lootString = `*${index + 1}.* ${player.name} *(${player.roll})* :money_mouth_face: :money_mouth_face: :money_mouth_face:\n`;
+        } else if (index === sortedLootRoll.length - 1) {
+            lootString += `*${index + 1}.* ${player.name} *(${player.roll})* :poop:\n`;
         } else {
             lootString += `*${index + 1}.* ${player.name} *(${player.roll})*\n`;
         }
