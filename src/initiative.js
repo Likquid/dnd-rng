@@ -53,7 +53,31 @@ exports.rollInitiative = async (responseUrl, res) => {
     });
     let data = {
         response_type: "in_channel",
-        text: `*Initiative order:*\n${initiativeString}`
+        text: `*Initiative Order:*\n${initiativeString}`
+    };
+    res.status(200).send();
+    return await delayedResponse(responseUrl, data);
+};
+
+exports.rollLoot = async (responseUrl, res) => {
+    let loot = [];
+    let roll = 0;
+    let lootString = '';
+    _.each(PLAYERS, (player) => {
+        roll = singleRoll(20);
+        const rolledPlayer = {
+            name: player.name,
+            roll,
+        };
+        loot.push(rolledPlayer);
+    });
+    let sortedLootRoll = _.orderBy(loot, ['roll'], ['desc']);
+    _.each(sortedLootRoll, (player, index) => {
+        lootString += `*${index + 1}.* ${player.name} *(${player.roll})*\n`;
+    });
+    let data = {
+        response_type: "in_channel",
+        text: `*Loot Order:*\n${lootString}`
     };
     res.status(200).send();
     return await delayedResponse(responseUrl, data);
