@@ -33,7 +33,7 @@ const PLAYERS = [
     }
 ];
 
-exports.rollInitiative = async (responseUrl, res) => {
+exports.initiative = async (responseUrl, res) => {
     let initiative = [];
     let roll = 0;
     let initiativeString = '';
@@ -59,7 +59,7 @@ exports.rollInitiative = async (responseUrl, res) => {
     return await delayedResponse(responseUrl, data);
 };
 
-exports.rollLoot = async (responseUrl, res) => {
+exports.loot = async (responseUrl, res) => {
     let loot = [];
     let roll = 0;
     let lootString = '';

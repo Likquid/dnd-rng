@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const { generateCharacter } = require('./src/characterGenerator');
 const { dndDieRngBuilder } = require('./src/dieRoller');
-const { rollInitiative, rollLoot } = require('./src/initiative');
+const { initiative, loot } = require('./src/partyRoller');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -14,9 +14,9 @@ app.get('/', (req, res) => res.send('Running'));
 
 app.post('/generate', async (req, res) => generateCharacter(req.body.response_url, res));
 
-app.post('/initiative', async (req, res) => rollInitiative(req.body.response_url, res));
+app.post('/initiative', async (req, res) => initiative(req.body.response_url, res));
 
-app.post('/lootroll', async (req, res) => rollLoot(req.body.response_url, res));
+app.post('/loot', async (req, res) => loot(req.body.response_url, res));
 
 app.post('/4', async (req, res) => dndDieRngBuilder(req, res, 4));
 
