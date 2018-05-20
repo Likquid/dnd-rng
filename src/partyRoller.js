@@ -40,15 +40,14 @@ const uniqueRoll = (modifier, initiativeArr) => {
     if (rollCollision) {
         return uniqueRoll(modifier, initiativeArr);
     }
-    return (roll + modifier);
+    return { roll, rollModifier: roll + modifier };
 };
 
 exports.initiative = async (responseUrl, res) => {
     let initiative = [];
-    let roll = 0;
     let initiativeString = '';
     _.each(PLAYERS, player => {
-        const rollModifier = uniqueRoll(player.modifier, initiative);
+        const { roll, rollModifier } = uniqueRoll(player.modifier, initiative);
         const rolledPlayer = {
             name: player.name,
             modifier: player.modifier,
