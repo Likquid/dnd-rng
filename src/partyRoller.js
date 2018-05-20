@@ -58,7 +58,7 @@ exports.initiative = async (responseUrl, res) => {
     });
     let sortedInitiative = _.orderBy(initiative, ['rollModifier'], ['desc']);
     _.each(sortedInitiative, (player, index) => {
-        initiativeString += `*${index + 1}.* ${player.name} ${player.rollModifier} _(${player.roll} + ${player.modifier})_\n`;
+        initiativeString += `*${index + 1}.* ${player.name}  *(${player.rollModifier})*  _(${player.roll} + ${player.modifier})_\n`;
     });
     let data = {
         response_type: "in_channel",
@@ -83,11 +83,11 @@ exports.loot = async (responseUrl, res) => {
     let sortedLootRoll = _.orderBy(loot, ['roll'], ['desc']);
     _.each(sortedLootRoll, (player, index) => {
         if (index === 0) {
-            lootString = `*${index + 1}.* ${player.name} *(${player.roll})* :money_mouth_face: :money_mouth_face: :money_mouth_face:\n`;
+            lootString = `*${index + 1}.* ${player.name}  *(${player.roll})*  :money_mouth_face: :money_mouth_face: :money_mouth_face:\n`;
         } else if (index === sortedLootRoll.length - 1) {
-            lootString += `*${index + 1}.* ${player.name} *(${player.roll})* :poop:\n`;
+            lootString += `*${index + 1}.* ${player.name}  *(${player.roll})*  :poop:\n`;
         } else {
-            lootString += `*${index + 1}.* ${player.name} *(${player.roll})*\n`;
+            lootString += `*${index + 1}.* ${player.name}  *(${player.roll})*\n`;
         }
     });
     let data = {
