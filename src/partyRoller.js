@@ -33,17 +33,27 @@ const PLAYERS = [
     }
 ];
 
+// TODO: clean up logic
+const uniqueRoll = (modifier, initiativeArr) => {
+    const roll = singleRoll(20);
+    const rollCollision = _.find(initiativeArr, player => (player.rollModifier === (roll + modifier)));
+    if (rollCollision) {
+        return uniqueRoll(modifier, initiativeArr);
+    }
+    return (roll + modifier);
+};
+
 exports.initiative = async (responseUrl, res) => {
     let initiative = [];
     let roll = 0;
     let initiativeString = '';
-    _.each(PLAYERS, (player) => {
-        roll = singleRoll(20);
+    _.each(PLAYERS, player => {
+        const rollModifier = uniqueRoll(player.modifier, initiative);
         const rolledPlayer = {
             name: player.name,
             modifier: player.modifier,
             roll,
-            rollModifier: roll + player.modifier
+            rollModifier
         };
         initiative.push(rolledPlayer);
     });
