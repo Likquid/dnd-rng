@@ -49,7 +49,7 @@ exports.rollInitiative = async (responseUrl, res) => {
     });
     let sortedInitiative = _.orderBy(initiative, ['rollModifier'], ['desc']);
     _.each(sortedInitiative, (player, index) => {
-        initiativeString += `${index + 1}. ${player.name} ${player.rollModifier} (${player.roll} + ${player.modifier})\n`;
+        initiativeString += `*${index + 1}.* ${player.name} ${player.rollModifier} _(${player.roll} + ${player.modifier})_\n`;
     });
     let data = {
         response_type: "in_channel",
