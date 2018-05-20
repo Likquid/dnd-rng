@@ -73,7 +73,11 @@ exports.rollLoot = async (responseUrl, res) => {
     });
     let sortedLootRoll = _.orderBy(loot, ['roll'], ['desc']);
     _.each(sortedLootRoll, (player, index) => {
-        lootString += `*${index + 1}.* ${player.name} *(${player.roll})*\n`;
+        if (index === 0) {
+            lootString = `*${index + 1}.* ${player.name} *(${player.roll}) JACKPOT!!!*\n`;
+        } else {
+            lootString += `*${index + 1}.* ${player.name} *(${player.roll})*\n`;
+        }
     });
     let data = {
         response_type: "in_channel",
