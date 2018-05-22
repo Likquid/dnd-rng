@@ -3,6 +3,7 @@ const app = express();
 const { generateCharacter } = require('./src/characterGenerator');
 const { dndDieRngBuilder } = require('./src/dieRoller');
 const { initiative, loot } = require('./src/partyRoller');
+const { contentFetcher } = require('./src/dndContent');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -17,6 +18,8 @@ app.post('/generate', async (req, res) => generateCharacter(req.body.response_ur
 app.post('/initiative', async (req, res) => initiative(req.body.response_url, res));
 
 app.post('/loot', async (req, res) => loot(req.body.response_url, res));
+
+app.post('/info', async (req, res) => contentFetcher(req, res));
 
 app.post('/4', async (req, res) => dndDieRngBuilder(req, res, 4));
 

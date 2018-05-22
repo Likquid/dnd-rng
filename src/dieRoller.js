@@ -33,12 +33,12 @@ exports.dndDieRngBuilder = async (req, res, max) => {
     const responseUrl = req.body.response_url;
     let rolledData;
     if (query === 'help') {
-        const helpText = diceRollerHelpText(max, username);
+        const helpText = diceRollerHelpText(max);
         res.status(200).send();
         return await delayedResponse(responseUrl, helpText);
     }
     if (isNaN(query) && query !== 'help') {
-        const errorText = dieRollerError(max, username);
+        const errorText = dieRollerError(max);
         res.status(200).send();
         return await delayedResponse(responseUrl, errorText);
     }

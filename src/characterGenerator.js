@@ -40,7 +40,7 @@ exports.generateCharacter = async (responseUrl, res) => {
     const response = await axios({
         method: 'get',
         url: 'http://npcgenerator.azurewebsites.net/_/npc?classorprof=0',
-        response: 'json'
+        responseType: 'json'
     });
     const data = response.data;
     const character = exports.characterContext(data);
