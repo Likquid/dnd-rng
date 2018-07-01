@@ -27,18 +27,18 @@ const PLAYERS = [
         name: 'Brandon',
         modifier: 1,
     },
-    {
-        name: 'John',
-        modifier: 1,
-    },
+    // {
+    //     name: 'John',
+    //     modifier: 1,
+    // },
     {
         name: 'Will',
         modifier: 3,
     },
-    {
-        name: 'Michael',
-        modifier: -1,
-    }
+    // {
+    //     name: 'Michael',
+    //     modifier: -1,
+    // }
 ];
 
 // TODO: clean up logic
