@@ -34,6 +34,10 @@ const PLAYERS = [
     {
         name: 'Will',
         modifier: 3,
+    },
+    {
+        name: 'Michael',
+        modifier: -1,
     }
 ];
 
