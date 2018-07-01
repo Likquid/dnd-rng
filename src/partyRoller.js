@@ -35,10 +35,10 @@ const PLAYERS = [
         name: 'Will',
         modifier: 3,
     },
-    // {
-    //     name: 'Michael',
-    //     modifier: -1,
-    // }
+    {
+        name: 'Michael',
+        modifier: -1,
+    }
 ];
 
 // TODO: clean up logic
