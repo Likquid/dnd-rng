@@ -15,14 +15,14 @@ const PLAYERS = [
     //     name: 'Tony',
     //     modifier: -1,
     // },
-    {
-        name: 'Abel',
-        modifier: 2,
-    },
-    {
-        name: 'Beixi',
-        modifier: -1,
-    },
+    // {
+    //     name: 'Abel',
+    //     modifier: 2,
+    // },
+    // {
+    //     name: 'Beixi',
+    //     modifier: -1,
+    // },
     {
         name: 'Brandon',
         modifier: 1,
@@ -35,10 +35,10 @@ const PLAYERS = [
     //     name: 'Will',
     //     modifier: 3,
     // },
-    // {
-    //     name: 'Michael',
-    //     modifier: -1,
-    // }
+    {
+        name: 'Michael',
+        modifier: -1,
+    }
 ];
 
 // TODO: clean up logic
