@@ -11,18 +11,18 @@ const PLAYERS = [
         name: 'Emily',
         modifier: 3,
     },
-    // {
-    //     name: 'Tony',
-    //     modifier: -1,
-    // },
-    // {
-    //     name: 'Abel',
-    //     modifier: 2,
-    // },
-    // {
-    //     name: 'Beixi',
-    //     modifier: -1,
-    // },
+    {
+        name: 'Tony',
+        modifier: -1,
+    },
+    {
+        name: 'Abel',
+        modifier: 2,
+    },
+    {
+        name: 'Beixi',
+        modifier: -1,
+    },
     {
         name: 'Brandon',
         modifier: 1,
