@@ -7,10 +7,10 @@ const PLAYERS = [
         name: 'Billy',
         modifier: -1,
     },
-    {
-        name: 'Emily',
-        modifier: 3,
-    },
+    // {
+    //     name: 'Emily',
+    //     modifier: 3,
+    // },
     {
         name: 'Tony',
         modifier: -1,
@@ -27,10 +27,10 @@ const PLAYERS = [
         name: 'Brandon',
         modifier: 1,
     },
-    {
-        name: 'John',
-        modifier: 1,
-    },
+    // {
+    //     name: 'John',
+    //     modifier: 1,
+    // },
     // {
     //     name: 'Will',
     //     modifier: 3,
