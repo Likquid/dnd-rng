@@ -5,7 +5,7 @@ const { delayedResponse } = require('./util/slackResponse');
 const PLAYERS = [
     {
         name: 'Billy',
-        modifier: -1,
+        modifier: +1,
     },
     // {
     //     name: 'Emily',
